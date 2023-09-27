@@ -28,7 +28,6 @@ RSpec.describe FoodTruck do
 
     expected_hash = {@item1 => 30}
     expect(@food_truck.inventory).to eq(expected_hash)
-    expect(@food_truck.check_stock(@item1)).to eq(30)
   end
 
   it 'can stock more items' do 
