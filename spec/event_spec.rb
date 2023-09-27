@@ -67,4 +67,34 @@ RSpec.describe Event do
     expect(@food_truck2.potential_revenue).to eq(345.00)
     expect(@food_truck3.potential_revenue).to eq(243.75)
   end
+  
+  it 'can check total inventory' do
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    expect(@event.total_inventory).to be_a(Hash)
+    expect(@event.total_inventory).to eq({
+      @item1 => {total: 100, food_trucks: ["Rocky Mountain Pies", "Palisade Peach Shack"]},
+      @item2 => {total:7, food_trucks: ["Rocky Mountain Pies"]},
+      @item3 => {total: 25, food_trucks: ["Ba-Nom-a-Nom"]},
+      @item4 => {total: 50, food_trucks: ["Ba-Nom-a-Nom"]}
+      })
+  end 
+
+  it 'can find overstocked items' do 
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)  
+    @event.add_food_truck(@food_truck3)
+    
+    #@event.total_inventory 
+    expect(@event.overstocked_items).to eq([@item1])
+  end
+
+  it 'can create a sorted list of items' do 
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)  
+    @event.add_food_truck(@food_truck3)
+    expect(@event.sorted_item_list).to be_a Array
+    expect(@event.sorted_item_list).to eq(['Apple Pie (Slice)',"Banana Nice Cream",'Peach Pie (Slice)',"Peach-Raspberry Nice Cream"])
+  end
 end
