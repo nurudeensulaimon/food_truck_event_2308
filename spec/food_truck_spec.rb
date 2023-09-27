@@ -22,4 +22,26 @@ RSpec.describe FoodTruck do
   it 'can check the stock' do 
     expect(@food_truck.check_stock(@item1)).to eq(0)
   end
+
+  it 'can stock items' do 
+    @food_truck.stock(@item1, 30)
+
+    expected_hash = {@item1 => 30}
+    expect(@food_truck.inventory).to eq(expected_hash)
+    expect(@food_truck.check_stock(@item1)).to eq(30)
+  end
+
+  it 'can stock more items' do 
+    @food_truck.stock(@item1, 30)
+    @food_truck.stock(@item1, 25)
+
+    expect(@food_truck.check_stock(@item1)).to eq(55)
+  end 
+   
+   it 'can stock different items' do
+    @food_truck.stock(@item2, 12)
+    expected_hash2 = {@item2 => 12}
+    expect(@food_truck.inventory).to eq(expected_hash2)
+    expect(@food_truck.check_stock(@item2)).to eq(12)
+  end
 end 

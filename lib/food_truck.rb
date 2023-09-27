@@ -7,11 +7,11 @@ attr_reader :name,
   end
 
   def check_stock(item)
-     if @inventory.include?(item)
-      return @inventory[item]
-     else    
-       @inventory[item] = 0
-     end 
+     @inventory[item]
+  end 
+
+  def stock(item, quantity)
+    @inventory[item] += quantity
   end
-end
+end 
   
