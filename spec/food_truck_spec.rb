@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/food_truck'
+require './lib/item'
 require 'pry'
 
 RSpec.describe FoodTruck do 
@@ -16,5 +17,9 @@ RSpec.describe FoodTruck do
   it 'has attributes' do 
     expect(@food_truck.name).to eq("Rocky Mountain Pies")
     expect(@food_truck.inventory).to eq({})
+  end
+
+  it 'can check the stock' do 
+    expect(@food_truck.check_stock(@item1)).to eq(0)
   end
 end 
